@@ -7,7 +7,7 @@
                 </h4>
                 <ul class="tab tab-pills">
                     <li>
-                        <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal">
+                        <a href="javascript:void(0)" class="tabmenu bg-dark btn" data-toggle="modal" data-target="#theModal">
                             Agregar
                         </a>
                     </li>
@@ -62,7 +62,12 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-
+        window.livewire.on('show-modal', msg =>{
+           $('#theModal').modal('show');
+        });
+        window.livewire.on('category-added', msg =>{
+            $('#theModal').modal('hide');
+        });
     });
 </script>
 

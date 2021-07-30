@@ -308,7 +308,7 @@ var App = function() {
                 $html = '<link href="assets/css/structure-minimal.css" rel="stylesheet" type="text/css" class="structure-minimal" />';
                 $(".structure").after($html);
                 $(Selector.getBody).addClass('minimal');
-                
+
             } else {
                 $('.dashboard-analytics-minimal').remove();
                 $(Selector.getBody).removeClass('minimal');
@@ -359,7 +359,7 @@ var App = function() {
                 toggleFunction.sidebar();
             }
         },
-        
+
         onResize: function() {
             $(window).on('resize', function(event) {
                 event.preventDefault();
@@ -368,7 +368,7 @@ var App = function() {
                 }
             });
         }
-        
+
     }
 
     var _desktopResolution = {
@@ -378,7 +378,7 @@ var App = function() {
                 toggleFunction.sidebar(true);
             }
         },
-        
+
         onResize: function() {
             $(window).on('resize', function(event) {
                 event.preventDefault();
@@ -387,7 +387,7 @@ var App = function() {
                 }
             });
         }
-        
+
     }
 
     function sidebarFunctionality() {
@@ -461,7 +461,7 @@ var App = function() {
             /*
                 Mobile Resoltion fn
             */
-            _mobileResolution.onRefresh();            
+            _mobileResolution.onRefresh();
             _mobileResolution.onResize();
 
             sidebarFunctionality();
@@ -476,7 +476,7 @@ var App = function() {
             inBuiltfunctionality.onSidebarHover();
 
 
-            colorPallet.createPallet();
+            //colorPallet.createPallet();
             colorPallet.setColorPalletTimer();
             colorPallet.setcolorScheme();
         }
