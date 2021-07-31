@@ -21,8 +21,8 @@
                         <thead class="text-white" style="background: #3b3f5c">
                         <tr>
                             <th class="table-th text-white">DESCRIPCION</th>
-                            <th class="table-th text-white">IMAGEN</th>
-                            <th class="table-th text-white">ACTIONS</th>
+                            <th class="table-th text-white text-center">IMAGEN</th>
+                            <th class="table-th text-white text-center">ACTIONS</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,8 @@
                             </td>
                             <td class="text-center">
                                     <span>
-                                        <img src="{{ asset('storage/categories/'.$category->image) }}" alt="imagen de ejemplo" height="70" width="80" class="rounded">
+                                        <img src="{{ asset('storage/categories/'. $category->imagen) }}"
+                                             alt="imagen de ejemplo" height="70" width="80" class="rounded">
                                     </span>
                             </td>
                             <td class="text-center">
@@ -42,8 +43,9 @@
                                    class="btn btn-dark mtmobile" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
+
                                 <a href="javascript:void(0)"
-                                   onclick="Confirm('{{$category->id}}')"
+                                   onclick="Confirm('{{$category->id}}', '{{$category->products->count()}}')"
                                    class="btn btn-dark" title="Delete">
                                     <i class="fas fa-trash"></i>
                                 </a>
@@ -68,6 +70,33 @@
         window.livewire.on('category-added', msg =>{
             $('#theModal').modal('hide');
         });
+        window.livewire.on('category-updated', msg =>{
+            $('#theModal').modal('hide');
+        });
     });
+
+    function Confirm(id, products)
+    {
+        if (products > 0)
+        {
+            swal('No se puede eliminar la categoria porque tiene productos relacionados.')
+            return;
+        }
+        swal({
+            title: 'CONFIRMAR',
+            text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3B3F5C'
+        }).then(function (result) {
+           if (result.value){
+               window.livewire.emit('deleteRow', id)
+               swal.close()
+           }
+        });
+    }
 </script>
 
