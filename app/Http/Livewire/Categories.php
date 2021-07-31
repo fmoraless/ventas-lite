@@ -74,6 +74,61 @@ class Categories extends Component
         $this->emit('category-added', 'Categoría registrada');
     }
 
+    public function Update()
+    {
+        $rules = [
+            'name' => "required|min:3|unique:categories,name,{$this->selected_id}"
+        ];
+        $messages =[
+            'name.required' => 'Nombre de la categoría es requerido',
+            'name.min' => 'El nombre de la categoría debe tener al menos 3 caracteres.',
+            'name.unique' => 'Ya existe el nombre de la categoría',
+        ];
+
+        $this->validate($rules, $messages);
+
+        $category = Category::find($this->selected_id);
+        $category->update([
+           'name' => $this->name
+        ]);
+        if ($this->image){
+            $customFileName = uniqid() . '_.' . $this->image->extension();
+            $this->image->storeAs('public/categories', $customFileName);
+            $imageName = $category->image;
+
+            $category->image = $customFileName;
+            $category->save();
+
+            if ($imageName != null)
+            {
+                if(file_exists('storage/categories' . $imageName))
+                {
+                    unlink('storage/categories' . $imageName);
+                }
+            }
+        }
+
+        $this->resetUI();
+        $this->emit('category-updated', 'Categoría actualizada');
+    }
+
+    protected $listeners = [
+      'deleteRow' => 'Destroy'
+    ];
+
+    public function Destroy(Category $category)
+    {
+        //$category = Category::find($id);
+        $imageName = $category->image; //imagen temporal
+        $category->delete();
+
+        if ($imageName != null){
+            unlink('storage/categories/' . $imageName);
+        }
+        $this->resetUI();
+        $this->emit('category-deleted', 'Categoría eliminada');
+    }
+
     public function resetUI() {
         $this->name ='';
         $this->image =null;
