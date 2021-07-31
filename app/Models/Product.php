@@ -18,4 +18,9 @@ class Product extends Model
         'alerts',
         'category_id',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
