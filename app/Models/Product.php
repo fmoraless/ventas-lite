@@ -23,4 +23,12 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function getImagenAttribute()
+    {
+        if (file_exists('storage/products/' . $this->image))
+            return $this->image;
+        else
+            return 'no-image.png';
+    }
 }
