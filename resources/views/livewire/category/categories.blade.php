@@ -7,7 +7,7 @@
                 </h4>
                 <ul class="tab tab-pills">
                     <li>
-                        <a href="javascript:void(0)" class="tabmenu bg-dark btn" data-toggle="modal" data-target="#theModal">
+                        <a href="javascript:void(0)" class="tabmenu bg-dark btn btn-sm" data-toggle="modal" data-target="#theModal">
                             Agregar
                         </a>
                     </li>
