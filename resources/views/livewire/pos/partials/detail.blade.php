@@ -17,7 +17,9 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             @foreach($cart as $item)
+
                                 <tr>
                                     <td class="text-center table-th">
                                         @if(count($item->attributes) > 0)
