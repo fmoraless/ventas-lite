@@ -14,7 +14,7 @@ use Livewire\Component;
 
 class PosComponent extends Component
 {
-    public $total, $cart =[], $itemsQuantity, $denominations=[], $efectivo, $change;
+    public $total, $itemsQuantity, $denominations=[], $efectivo, $change;
 
     public function mount()
     {
@@ -22,15 +22,15 @@ class PosComponent extends Component
         $this->change = 0;
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
-
     }
 
     public function render()
     {
+       // dd(Cart::getContent()->sortBy('name'));
         $this->denominations = Denomination::all();
         return view('livewire.pos.component', [
                 'denominations' => Denomination::orderBy('value', 'desc')->get(),
-                'cart' => Cart::getContent()->sortBy('name'),
+                'cart' => Cart::getContent()->sortBy('name')
             ])
             ->extends('layouts.theme.app')
             ->section('content');
@@ -56,7 +56,7 @@ class PosComponent extends Component
         $product = Product::where('barcode', $barcode)->first();
         //dd($product); //Producto encontrado!
         if ($product == null || empty($product)){
-            $this->emit('scan-not-found', 'El producto no fue encontrado');
+            $this->emit('scan-notfound', 'El producto no fue encontrado');
         }else{
             if ($this->InCart($product->id))
             {
@@ -71,9 +71,12 @@ class PosComponent extends Component
             }
 
             Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
-
+            /*$carro = Cart::getContent();
+            dd($carro);*/
 
             $this->total = Cart::getTotal();
+            $this->itemsQuantity = Cart::getTotalQuantity();
+
             $this->emit('scan-ok', 'Producto agregado');
         }
     }
@@ -168,7 +171,7 @@ class PosComponent extends Component
         $this->emit('scan-ok', 'Carro vacío');
     }
 
-    public function SaveSale()
+    public function saveSale()
     {
         if ($this->total <= 0){
             $this->emit('sale-error', 'AGREGA PRODUCTOS A LA VENTA');
