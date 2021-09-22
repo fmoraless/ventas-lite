@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\AsignarComponent;
 use App\Http\Livewire\CoinsComponent;
 use App\Http\Livewire\PermisosComponent;
 use App\Http\Livewire\PosComponent;
@@ -33,3 +34,4 @@ Route::get('coins', CoinsComponent::class);
 Route::get('pos', PosComponent::class);
 Route::get('roles', RolesComponent::class);
 Route::get('permisos', PermisosComponent::class);
+Route::get('asignar', AsignarComponent::class);
