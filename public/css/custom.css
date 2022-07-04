@@ -1,0 +1,23 @@
+.table-bordered td, .table-bordered th {
+	border: none!important; 
+}
+@media (min-width: 768px) {
+	.col-sm-3half, .col-sm-8half {
+		float: left;
+	}
+	.col-sm-3half {
+		width: 50%;
+	}
+	.col-sm-8half {
+		width: 50%;
+	}
+
+}
+.den {
+	font-size: 15px!important;
+}
+
+.input-gp {
+	background: #3B3F5C!important; color:white!important;
+
+}
