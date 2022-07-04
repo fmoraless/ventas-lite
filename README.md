@@ -22,11 +22,11 @@ Puedes seguir estos pasos para la instalación:
 
 * Clonar desde github (usar github desktop)
 ```bash
-  gh repo clone fmoraless/jsonapi
+  gh repo clone fmoraless/ventas-lite
 ```
 * Vaya a la carpeta del proyecto
 ```bash
-  cd my-project
+  cd ventas-lite
 ```
 * Instalar dependencias con composer desde consola
 ```bash
@@ -61,6 +61,11 @@ Ejecutar las migraciones y datos de prueba
 
 ```bash
   php artisan migrate:fresh --seed
+```
+Habilitar el storage para que se pueda subir archivos
+
+```bash
+  php artisan storage:link
 ```
 
 Iniciar el server
